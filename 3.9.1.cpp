@@ -13,13 +13,31 @@ public:
 		numerator_ = numerator;
 		denominator_ = denominator;
 	}
-	double fract() { return (numerator_/ denominator_); }
-	bool operator==(Fraction other) { return fract() == other.fract(); }
-	bool operator!=(Fraction other) { return !(*this == other); }
-	bool operator>(Fraction other) { return fract() > other.fract(); }
-	bool operator<(Fraction other) { return other > *this; }
-	bool operator>=(Fraction other) { return !(*this < other); }
-	bool operator<=(Fraction other) { return !(*this > other); }
+	
+	bool operator==(Fraction other) {
+		if ((numerator_ * other.denominator_ - denominator_ * other.numerator_) == 0) {
+			return true;
+		}
+	}
+	bool operator!=(Fraction other) {
+		if (*this == other) { return false; }
+		else return true;
+	}
+	bool operator>(Fraction other) { if ((numerator_ * other.denominator_ - denominator_ * other.numerator_) > 0) { return true; }
+	}
+	bool operator<(Fraction other) { 
+		if (*this > other) { return false; }
+		else if (*this == other) { return false; }
+		else return true;
+	}
+	bool operator>=(Fraction other) {
+		if (*this > other || *this == other) { return true; }
+		else return false;
+	}
+	bool operator<=(Fraction other) {
+		if (*this < other || *this == other) { return true; }
+		else return false;
+	}
 };
 
 int main()
@@ -34,5 +52,5 @@ int main()
 	cout << "f1" << ((f1 <= f2) ? " <= " : " not <= ") << "f2" << '\n';
 	cout << "f1" << ((f1 >= f2) ? " >= " : " not >= ") << "f2" << '\n';
 
-    return 0;
+	return 0;
 }
